@@ -1,6 +1,7 @@
 // backend/src/server.js
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 
@@ -14,6 +15,9 @@ const app = express();
 // Middlewares
 app.use(cors()); // React app ko API call karne ki permission deta hai
 app.use(express.json()); // Frontend se aane wale JSON data ko parse karta hai
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Routes mount karna
 app.use('/api/auth', authRoutes);

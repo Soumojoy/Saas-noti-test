@@ -3,9 +3,12 @@ const pool = require('./config/db');
 
 const createWidgetTable = async () => {
   const query = `
-    CREATE TABLE IF NOT EXISTS widget_configs (
+    DROP TABLE IF EXISTS widget_configs CASCADE;
+
+    CREATE TABLE widget_configs (
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        widget_key VARCHAR(100) UNIQUE NOT NULL,
         popup_text VARCHAR(255) DEFAULT '{{name}} from {{city}} bought {{product}}',
         theme_color VARCHAR(50) DEFAULT '#2563eb',
         position VARCHAR(50) DEFAULT 'bottom-left',

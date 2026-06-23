@@ -1,8 +1,13 @@
 // frontend/src/utils/api.js
 import axios from 'axios';
 
+// Detect if running locally or in codespaces
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const devBaseUrl = 'http://localhost:5000/api';
+const codespaceBaseUrl = 'https://ubiquitous-chainsaw-5gxjv4jr44pqcjw7-5000.app.github.dev/api';
+
 const api = axios.create({
-  baseURL: 'https://ubiquitous-chainsaw-5gxjv4jr44pqcjw7-5000.app.github.dev/api', // Backend URL
+  baseURL: isLocal ? devBaseUrl : codespaceBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },
